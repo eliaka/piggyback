@@ -47,8 +47,7 @@ do
         --dataset $DATASET --num_outputs ${NUM_OUTPUTS[$DATASET]} \
         --no_mask --finetune_layers $FT_LAYERS $TRAIN_BN \
         --lr $LR --lr_decay_every $LR_DECAY_EVERY \
-        ### --lr_decay_factor 0.1 --finetune_epochs 30 \
-        --lr_decay_factor 0.1 --finetune_epochs 15 \
+        --lr_decay_factor 0.1 --finetune_epochs 10 \
         --save_prefix $CKPT_DIR'/'$TAG'.pt' | tee $LOG_DIR'/'$TAG'.txt'
     done
   done
