@@ -21,7 +21,7 @@ LR=1e-3
 
 for RUN_ID in `seq 1 $NUM_RUNS`;
 do
-  # for DATASET in stanford_cars_cropped cubs_cropped flowers wikiart sketches; do
+  ### for DATASET in stanford_cars_cropped cubs_cropped flowers wikiart sketches; do
   for DATASET in flowers; do
     mkdir ../checkpoints/$DATASET
     mkdir ../logs/$DATASET
@@ -47,7 +47,8 @@ do
         --dataset $DATASET --num_outputs ${NUM_OUTPUTS[$DATASET]} \
         --no_mask --finetune_layers $FT_LAYERS $TRAIN_BN \
         --lr $LR --lr_decay_every $LR_DECAY_EVERY \
-        --lr_decay_factor 0.1 --finetune_epochs 30 \
+        ### --lr_decay_factor 0.1 --finetune_epochs 30 \
+        --lr_decay_factor 0.1 --finetune_epochs 15 \
         --save_prefix $CKPT_DIR'/'$TAG'.pt' | tee $LOG_DIR'/'$TAG'.txt'
     done
   done
