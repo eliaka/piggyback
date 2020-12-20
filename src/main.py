@@ -244,7 +244,6 @@ class Manager(object):
             errors = self.eval()
             error_history.append(errors)
             accuracy = 100 - errors[0]  # Top-1 accuracy.
-            
 
             # Save performance history and stats.
             with open(savename + '.json', 'w') as fout:
