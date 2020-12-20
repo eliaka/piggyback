@@ -159,7 +159,9 @@ class Manager(object):
 
         # Do forward-backward.
         output = self.model(batch)
-        self.criterion(output, label).backward()
+        loss = self.criterion(output, label) ####
+        loss.backward() ####
+        #### self.criterion(output, label).backward()
 
         # Scale gradients by average weight magnitude.
         if self.args.mask_scale_gradients != 'none':
@@ -242,7 +244,7 @@ class Manager(object):
             errors = self.eval()
             error_history.append(errors)
             accuracy = 100 - errors[0]  # Top-1 accuracy.
-            loss = criterion(output, label) ### Calculate loss
+            
 
             # Save performance history and stats.
             with open(savename + '.json', 'w') as fout:
