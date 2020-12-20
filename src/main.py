@@ -242,6 +242,7 @@ class Manager(object):
             errors = self.eval()
             error_history.append(errors)
             accuracy = 100 - errors[0]  # Top-1 accuracy.
+            loss = criterion(output, label) ### Calculate loss
 
             # Save performance history and stats.
             with open(savename + '.json', 'w') as fout:
@@ -253,6 +254,7 @@ class Manager(object):
             ### Print model accuracy, if required. Added this to print accuracy at every epoch even if it's not the best.
             if save:
                 print('Accuracy: %0.2f%%' % (accuracy))
+                print('Loss: %0.2f%%' % (loss)) ### Print loss
 
             # Save best model, if required.
             if save and accuracy > best_accuracy:
