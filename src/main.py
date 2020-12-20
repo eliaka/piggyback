@@ -249,6 +249,10 @@ class Manager(object):
                     'error_history': error_history,
                     'args': vars(self.args),
                 }, fout)
+                
+            ### Print model accuracy, if required. Added this to print accuracy at every epoch even if it's not the best.
+            if save:
+                print('Accuracy: %0.2f%%' % (accuracy))
 
             # Save best model, if required.
             if save and accuracy > best_accuracy:
