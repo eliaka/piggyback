@@ -216,6 +216,7 @@ class Manager(object):
             'accuracy': best_accuracy,
             'errors': errors,
             'model': self.model,
+            'loss': self.criterion #########
         }
 
         # Save to file.
@@ -244,7 +245,7 @@ class Manager(object):
             errors = self.eval()
             error_history.append(errors)
             accuracy = 100 - errors[0]  # Top-1 accuracy.
-            #### loss = self.criterion(output, label) ####
+            loss = self.criterion(output, label) ####
 
             # Save performance history and stats.
             with open(savename + '.json', 'w') as fout:
@@ -256,8 +257,8 @@ class Manager(object):
             ### Print model accuracy, if required. Added this to print accuracy at every epoch even if it's not the best.
             if save:
                 print('Epoch_Accuracy: %0.2f%%' % (accuracy))
-                print('Loss: %0.2f%%' % (self.criterion(output, label)))
-                #### print('Loss: %0.2f%%' % (loss)) ### Print loss
+                print('Loss: %0.2f%%' % (loss)) ### Print loss
+                ########## print('Loss: %0.2f%%' % (self.criterion))
 
             # Save best model, if required.
             if save and accuracy > best_accuracy:
