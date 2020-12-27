@@ -256,6 +256,7 @@ class Manager(object):
             ### Print model accuracy, if required. Added this to print accuracy at every epoch even if it's not the best.
             if save:
                 print('Epoch_Accuracy: %0.2f%%' % (accuracy))
+                print('Loss: %0.2f%%' % (self.criterion(output, label)))
                 #### print('Loss: %0.2f%%' % (loss)) ### Print loss
 
             # Save best model, if required.
