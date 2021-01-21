@@ -124,15 +124,15 @@ class ModifiedVGG16BN(ModifiedVGG16):
             vgg16_bn = modnets.vgg16_bn(mask_init, mask_scale, threshold_fn)
             vgg16_bn_pretrained = models.vgg16_bn(pretrained=True)
             # Copy weights from the pretrained to the modified model.
-#             for module, module_pretrained in zip(vgg16_bn.modules(), vgg16_bn_pretrained.modules()):
-#                 if 'ElementWise' in str(type(module)):
-#                     module.weight.data.copy_(module_pretrained.weight.data)
-#                     module.bias.data.copy_(module_pretrained.bias.data)
-#                 elif 'BatchNorm' in str(type(module)):
-#                     module.weight.data.copy_(module_pretrained.weight.data)
-#                     module.bias.data.copy_(module_pretrained.bias.data)
-#                     module.running_mean.copy_(module_pretrained.running_mean)
-#                     module.running_var.copy_(module_pretrained.running_var)                  
+            for module, module_pretrained in zip(vgg16_bn.modules(), vgg16_bn_pretrained.modules()):
+                if 'ElementWise' in str(type(module)):
+                    module.weight.data.copy_(module_pretrained.weight.data)
+                    module.bias.data.copy_(module_pretrained.bias.data)
+                elif 'BatchNorm' in str(type(module)):
+                    module.weight.data.copy_(module_pretrained.weight.data)
+                    module.bias.data.copy_(module_pretrained.bias.data)
+                    module.running_mean.copy_(module_pretrained.running_mean)
+                    module.running_var.copy_(module_pretrained.running_var)                  
             vgg16_bn_pretrained = nn.Sequential() ######
             vgg16_bn_pretrained.features = nn.Sequential(*list(vgg16_bn_pretrained_.features.children())) ######
             vgg16_bn_pretrained.classifier = nn.Sequential(*list(vgg16_bn_pretrained_.classifier.children())) ######
