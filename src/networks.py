@@ -132,10 +132,11 @@ class ModifiedVGG16BN(ModifiedVGG16):
 #                     module.weight.data.copy_(module_pretrained.weight.data)
 #                     module.bias.data.copy_(module_pretrained.bias.data)
 #                     module.running_mean.copy_(module_pretrained.running_mean)
-#                     module.running_var.copy_(module_pretrained.running_var)
-            vgg16_pretrained = nn.Sequential() #####
-            vgg16_pretrained.features = nn.Sequential(*list(vgg16_pretrained_.features.children())) #####
-            vgg16_pretrained.classifier = nn.Sequential(*list(vgg16_pretrained_.classifier.children())) #####
+#                     module.running_var.copy_(module_pretrained.running_var)                  
+            vgg16_bn_pretrained = nn.Sequential() ######
+            vgg16_bn_pretrained.features = nn.Sequential(*list(vgg16_bn_pretrained_.features.children())) ######
+            vgg16_bn_pretrained.classifier = nn.Sequential(*list(vgg16_bn_pretrained_.classifier.children())) ######
+
             print('Creating model: Mask layers created.')
 
         self.datasets, self.classifiers = [], nn.ModuleList()
