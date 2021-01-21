@@ -41,10 +41,13 @@ class ModifiedVGG16(nn.Module):
             vgg16 = modnets.vgg16(mask_init, mask_scale, threshold_fn)
             vgg16_pretrained = models.vgg16(pretrained=True)
             # Copy weights from the pretrained to the modified model.
-            for module, module_pretrained in zip(vgg16.modules(), vgg16_pretrained.modules()):
-                if 'ElementWise' in str(type(module)):
-                    module.weight.data.copy_(module_pretrained.weight.data)
-                    module.bias.data.copy_(module_pretrained.bias.data)
+#             for module, module_pretrained in zip(vgg16.modules(), vgg16_pretrained.modules()):
+#                 if 'ElementWise' in str(type(module)):
+#                     module.weight.data.copy_(module_pretrained.weight.data)
+#                     module.bias.data.copy_(module_pretrained.bias.data)
+            vgg16_pretrained = nn.Sequential() #####
+            vgg16_pretrained.features = nn.Sequential(*list(vgg16_pretrained_.features.children())) #####
+            vgg16_pretrained.classifier = nn.Sequential(*list(vgg16_pretrained_.classifier.children())) #####
             print('Creating model: Mask layers created.')
 
         self.datasets, self.classifiers = [], nn.ModuleList()
