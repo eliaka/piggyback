@@ -25,14 +25,14 @@ class Binarizer(torch.autograd.Function):
 #     def backward(self, gradOutput):
 #         return gradOutput
     @staticmethod
-    def forward(ctx, inputs, threshold=DEFAULT_THRESHOLD):
+    def forward(self, inputs, threshold=DEFAULT_THRESHOLD):
         outputs = inputs.clone()
         outputs[inputs.le(threshold)] = 0
         outputs[inputs.gt(threshold)] = 1
         return outputs
 
     @staticmethod
-    def backward(ctx, gradOutput):
+    def backward(self, gradOutput):
         return gradOutput
 
 
@@ -53,7 +53,7 @@ class Ternarizer(torch.autograd.Function):
 #     def backward(self, gradOutput):
 #         return gradOutput
     @staticmethod
-    def forward(ctx, inputs, threshold=DEFAULT_THRESHOLD):
+    def forward(self, inputs, threshold=DEFAULT_THRESHOLD):
 
         outputs = inputs.clone()
         outputs.fill_(0)
@@ -62,7 +62,7 @@ class Ternarizer(torch.autograd.Function):
         return outputs
 
     @staticmethod
-    def backward(ctx, gradOutput):
+    def backward(self, gradOutput):
         return gradOutput
 
 
